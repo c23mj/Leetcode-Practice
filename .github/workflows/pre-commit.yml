@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run pre-commit script
-        run: ./pre_commit.sh
+        run: ./update_README.sh
       - name: Configure git
         run: |
           git config --global user.name "github-actions[bot]"
