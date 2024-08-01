@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Count the number of folders
-count=$(find . -maxdepth 1 -type d | wc -l)
+count=$(find . -maxdepth 1 -type d -not -name '.*' | wc -l)
 # Subtract 1 to exclude the current directory (.)
 count=$((count - 1))
 
