@@ -9,4 +9,4 @@ count=$((count - 1))
 readme_file="README.md"
 
 # Update the README.md file with the current folder count
-sed -i '' "s/Number of questions solved so far:.*/Number of questions solved so far: $count/" $readme_file
+sed -i "s/Number of questions solved so far:.*/Number of questions solved so far: $count/" $readme_file
