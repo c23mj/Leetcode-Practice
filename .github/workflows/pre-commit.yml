@@ -1,11 +1,23 @@
 name: Pre-commit
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run count update script
-        run: ./update_README.sh
+      - name: Run pre-commit script
+        run: ./pre_commit.sh
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Commit changes
+        run: |
+          git add README.md
+          git commit -m "Update README with the current folder count"
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
