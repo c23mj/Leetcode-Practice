@@ -24,6 +24,10 @@ jobs:
       - name: Run pre-commit script
         run: ./update_README.sh
 
+      - name: Get original commit message
+        id: get_message
+        run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
+
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Apply pre-commit changes"
+          commit_message: "${{ steps.get_message.outputs.message }}"
