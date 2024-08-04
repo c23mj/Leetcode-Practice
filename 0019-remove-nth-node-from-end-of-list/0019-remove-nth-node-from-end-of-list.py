@@ -10,7 +10,6 @@ class Solution:
         while curr:
             sz += 1
             curr = curr.next    
-
         dummy = ListNode(val=0, next=head)
         deleteIdx = sz - n
         curr = dummy
