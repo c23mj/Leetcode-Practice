@@ -1,26 +1,23 @@
 class Solution:
-    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+    def combinationSum2(self, candidates, target):
+        answer = []
         candidates.sort()
-        print(candidates)
-        memo = dict()
-        def combHelper(target: int, i: int) -> List[List[int]]:
-            # print(f"calling combHelper on {target}, {i}")
-            if target == 0:
-                return [[]]
-            if (target, i) in memo:
-                return memo[(target, i)]
-            out = []
-            unique = set()
-            for j in range(i, len(candidates)):
-                if candidates[j] > target:
-                    break
-                cands = [[candidates[j]] + comb for comb in combHelper(target - candidates[j], j + 1)]
-                for cand in cands:
-                    if tuple(cand) not in unique:
-                        unique.add(tuple(cand))
-                        out.append(cand)
-            memo[(target, i)] = out
-            # print(f"output: {out}")
-            return out
-        return combHelper(target, 0)
+        self.backtrack(candidates, target, 0, [], answer)
+        return answer
 
+    def backtrack(self, candidates, target, totalIdx, path, answer):
+        if target < 0:
+            return  # backtracking
+        if target == 0:
+            answer.append(path)
+            return  # end
+        for i in range(totalIdx, len(candidates)):
+            if i != totalIdx and candidates[i] == candidates[i - 1]:
+                continue
+            self.backtrack(
+                candidates,
+                target - candidates[i],
+                i + 1,
+                path + [candidates[i]],
+                answer,
+            )
