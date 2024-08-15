@@ -1,7 +1,7 @@
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         netGas = [gas[i] - cost[i] for i in range(len(gas))]
-        print(netGas)
+        # print(netGas)
         if sum(netGas) < 0:
             return -1
         idx, currSum = 0, 0
