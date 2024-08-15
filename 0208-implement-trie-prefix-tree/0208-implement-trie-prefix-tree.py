@@ -12,16 +12,15 @@ class Trie:
     def search(self, word: str) -> bool:
         curr = self
         for char in word:
-            if not curr.children.get(char):
+            curr = curr.children.get(char)
+            if not curr:
                 return False
-            curr = curr.children[char]
         return curr.valid
-        
 
     def startsWith(self, prefix: str) -> bool:
         curr = self
         for char in prefix:
-            if not curr.children.get(char):                
+            curr = curr.children.get(char)
+            if not curr:
                 return False
-            curr = curr.children[char]
         return True
